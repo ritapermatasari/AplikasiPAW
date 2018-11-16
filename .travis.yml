@@ -1,0 +1,22 @@
+sudo: required
+dist: trusty
+language: php
+
+# versi PHP
+php:
+  -7.1
+
+# branch yang digunakan
+branches:
+  only:
+    -master
+    -develop
+
+before_install:
+  - curl -LO https://storage.googleapis.com/kubernetes-realese/realese/$(curl -s https://storage.googleapis/kubernetes-realese/realese/stable.txt)/bin/linux/amd64/kubectl
+  -chmod +x ./kubectl
+  -sudo mv ./kubectl/usr/local/bin/kubectl
+
+before_script:
+
+script:
