@@ -1,0 +1,28 @@
+sudo: required
+dist: trusty
+language: php
+
+#->versi php
+php : 
+  - 7.1
+
+branches :
+  only:
+    - master #->qa/staging server
+    - develop #-> DevServer
+
+#-> install environment di OS
+before_install:
+# - curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
+
+# precompile
+before_script:
+# Main execution (build)
+- cp .env.travis .env
+- composer install --no-interaction
+- php artisan key:generate
+# php artisan db:inigrate
+
+
+script:
+  - ./vendor/bin/phpunit
